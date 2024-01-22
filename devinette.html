@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <label for="chiffre_inferieur_donne">Chiffre minimum<br>
+        <input type="number" id="chiffre_inferieur_donne">
+    </label>
+    <br>
+
+    <label for="chiffre_superieur_donne">Chiffre plus grand<br>
+        <input type="number" id="chiffre_superieur_donne">
+    </label>
+    <button id="btn_valider_chiffre_random">Valider</button>
+
+
+    <br><br><br><br><br>
+
+
+
+
+    <label for="nbre_essai_utilisateur_donne">Validez le nombre d'essai que vous voulez faire<br>
+        <input type="number" id="nbre_essai_utilisateur_donne">
+    </label>
+    <button id="btn_essais">Valider</button>
+
+    <br><br><br><br><br>
+
+
+
+    <label for="chiffre_essai_donne"> Trouve un chiffre entre 1 et 10 <div id="nombre_essai_donne_affichage"></div><br>
+        <input type="number" id="chiffre_essai_donne">
+    </label> <br>
+    <button id="btn_random">Jouez</button>
+    <div id="answer"></div>
+    <div id="nombreEssai"></div>
+
+
+
+
+</head>
+
+<body>
+    <script>
+
+
+
+        let random_inférieur, random_superieur,
+
+            random_inférieur = document.getElementById('')
+
+
+        let random = Math.floor(Math.random() * 10) + 1;
+        let input_chiffre_aleatoire, button_btn_random, output_answer;
+        let essai, div_nbre_essai, btn_essais, input_nbre_essai_utilisateur_donne, affichage_essai;
+        let essai_fait = 0;
+        let indice = 0
+        console.log('Le chiffre random est: ' + random)
+
+
+
+
+
+
+
+
+        output_answer = document.getElementById('answer')
+        button_btn_random = document.getElementById('btn_random')
+        div_nbre_essai = document.getElementById('nombreEssai')
+        input_nbre_essai_utilisateur_donne = document.getElementById('nbre_essai_utilisateur_donne')
+        button_btn_essais = document.getElementById('btn_essais')
+        affichage_essai = document.getElementById('nombre_essai_donne_affichage')
+
+
+
+        button_btn_essais.addEventListener('click', () => {
+            if (indice == 0) {
+                essai = input_nbre_essai_utilisateur_donne.value;
+                console.log('Le nombre d\'essai défini la première fois par l\'utilisateur: ' + essai)
+                indice += 1
+                div_nbre_essai.innerHTML = 'Vous avez réalisé ' + essai_fait + '/' + essai + ' essais';
+                affichage_essai.innerHTML = '(Le nombre d\'essai est de: ' + essai + ')';
+            }
+            else {
+                console.log('Le nombre d\'essai est de : ' + essai);
+            }
+        })
+
+        //affichage essais
+        div_nbre_essai.innerHTML = 'Vous avez réalisé ' + essai_fait + '/' + essai + ' essais';
+
+
+        button_btn_random.addEventListener('click', () => {
+            essai_fait += 1
+            console.log('Nbre d\'essais fait : ' + essai_fait)
+
+            input_chiffre_aleatoire = document.getElementById('chiffre_essai_donne')
+            input_chiffre_aleatoire = input_chiffre_aleatoire.value
+
+            div_nbre_essai.innerHTML = 'Vous avez réalisé ' + essai_fait + '/' + essai + ' essais';
+            if (input_chiffre_aleatoire < 1 || input_chiffre_aleatoire > 10 && essai >= essai_fait) {
+                output_answer.innerHTML = 'Chiffre hors limite'
+
+            }
+
+            else if (isNaN(input_chiffre_aleatoire) && essai >= essai_fait) {
+                output_answer.innerHTML = 'Mauvais caractère'
+
+            }
+
+            else if (input_chiffre_aleatoire > random && essai >= essai_fait) {
+                output_answer.innerHTML = 'Trop grand'
+
+            }
+
+            else if (input_chiffre_aleatoire < random && essai >= essai_fait) {
+                output_answer.innerHTML = 'Trop petit'
+
+            }
+
+            else if (input_chiffre_aleatoire == random && essai >= essai_fait) {
+                output_answer.innerHTML = 'GG'
+            }
+            else {
+                output_answer.innerHTML = ''
+                div_nbre_essai.innerHTML = 'Vous avez perdu tous vos essais.';
+            }
+
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
